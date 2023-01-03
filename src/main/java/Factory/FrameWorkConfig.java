@@ -18,5 +18,7 @@ public interface FrameWorkConfig extends Config {
     String numberofproduct();
     String currency();
     int thenumber();
+    String browser();
+    String anotherbrowser();
 
 }

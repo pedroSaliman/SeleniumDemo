@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import lombok.SneakyThrows;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -15,9 +16,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
-
+import static Factory.DriverManger.*;
 
 public class ExtentReportListener implements ITestListener {
 
@@ -92,25 +94,28 @@ public class ExtentReportListener implements ITestListener {
         test.get().getModel().setStartTime(getTime(result.getStartMillis()));
     }
 
+    @SneakyThrows
     public synchronized void onTestSuccess(ITestResult result) {
-        System.out.println((result.getMethod().getMethodName() + " passed!"));
+        System.out.println((result.getMethod().getMethodName() + " passes!"));
         test.get().pass("Test passed");
-        test.get().pass(result.getThrowable());
+        test.get().pass(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromBase64String(Screen(),result.getMethod().getMethodName()).build());
         test.get().getModel().setEndTime(getTime(result.getEndMillis()));
     }
 
 
 
+    @SneakyThrows
     public synchronized void onTestFailure(ITestResult result) {
         System.out.println((result.getMethod().getMethodName() + " failed!"));
-        test.get().fail(result.getThrowable());
+        test.get().fail(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromBase64String(Screen(),result.getMethod().getMethodName()).build());
         test.get().getModel().setEndTime(getTime(result.getEndMillis()));
     }
 
 
+    @SneakyThrows
     public synchronized void onTestSkipped(ITestResult result) {
         System.out.println((result.getMethod().getMethodName() + " skipped!"));
-        test.get().skip(result.getThrowable());
+        test.get().skip(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromBase64String(Screen(),result.getMethod().getMethodName()).build());
         test.get().getModel().setEndTime(getTime(result.getEndMillis()));
     }
 

@@ -29,10 +29,6 @@ public class TestCases extends BaseTest{
         Assert.assertTrue(new ProductPage().Price().contains("€"));
 
     }
-
-
-
-
 /////////////////////////////////////////////////
 
     @Test(dependsOnMethods = {"changeCurrency"})

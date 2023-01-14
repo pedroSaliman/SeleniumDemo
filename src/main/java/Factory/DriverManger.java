@@ -1,5 +1,6 @@
 package Factory;
 
+import enums.BrowserTypes;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.commons.io.FileUtils;
@@ -8,6 +9,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
@@ -28,20 +30,28 @@ public class DriverManger {
      dr.set(driverr);
  }
 
- public static void init(String browser)
+ public static void init(BrowserTypes browser)
  {
 config=ConfigFactory.create(FrameWorkConfig.class);
 switch (browser){
-    case "chrome":
+    case CHROME:
         driver=WebDriverManager.chromedriver().create();
         driver=new ChromeDriver();
         setDriver(driver);
         getDr().get(config.url());
         getDr().manage().window().maximize();
         break;
-    case "firefox":
+    case FIREFOX:
         driver=WebDriverManager.firefoxdriver().create();
         driver=new FirefoxDriver();
+        setDriver(driver);
+        getDr().get(config.url());
+        getDr().manage().window().maximize();
+        break;
+
+    case EDGE:
+        driver=WebDriverManager.edgedriver().create();
+        driver=new EdgeDriver();
         setDriver(driver);
         getDr().get(config.url());
         getDr().manage().window().maximize();

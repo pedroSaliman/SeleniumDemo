@@ -16,7 +16,8 @@ public class HomePage extends PageBase{
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public void currencySelect(int thenumber){
-        selectbyindex(Currency,thenumber);
+
+        selectbyindex(e->e.selectByIndex(thenumber),Currency);
 
     }
 

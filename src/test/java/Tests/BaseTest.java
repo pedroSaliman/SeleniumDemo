@@ -3,6 +3,7 @@ package Tests;
 import Factory.DriverManger;
 import Factory.FrameWorkConfig;
 import com.github.javafaker.Faker;
+import enums.BrowserTypes;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +24,7 @@ public class BaseTest {
 
 
         config=ConfigFactory.create(FrameWorkConfig.class);
-        DriverManger.init(config.browser());
+        DriverManger.init(BrowserTypes.EDGE);
         new PageBase().setDriver(DriverManger.getDr());
 
     }
@@ -33,6 +34,6 @@ public class BaseTest {
 
     @AfterSuite
     public void TearDown(){
-        DriverManger.getDr().quit();
+        DriverManger.close();
     }
 }

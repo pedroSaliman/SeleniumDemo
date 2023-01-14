@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.function.Consumer;
 
 public class PageBase {
     public static WebDriver driver;
@@ -48,9 +49,10 @@ protected void clickandpressenter(By locator)
     find(locator).sendKeys(Keys.ENTER);
 }
 ////////////////Select By index Method///////////////
-protected void selectbyindex(By locator,int number){
-      Select sel= new Select(find(locator));
-      sel.selectByIndex(number);
+protected void selectbyindex(Consumer<Select> consumer,By locator){
+        consumer.accept(new Select(find(locator)));
+//      Select sel= new Select(find(locator));
+//      sel.selectByIndex(number);
 }
 
 

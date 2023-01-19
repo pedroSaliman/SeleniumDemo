@@ -29,9 +29,31 @@ public class TestCases extends BaseTest{
         Assert.assertTrue(new ProductPage().Price().contains("€"));
 
     }
-/////////////////////////////////////////////////
+    /////////////////////////////////////////
+
+
+
+
+
+
 
     @Test(dependsOnMethods = {"changeCurrency"})
+    public void Review(){
+        new HomePage().clicksearch(config.product()).clicktoproductpage();
+        new ProductPage().clickToReview().AddReviewInfo(config.tittlereview(),config.text());
+        Assert.assertTrue(new ReviewPage().ReviewMessage().contains("successfully added"));
+    }
+    /////////////////////////////////////////////////
+
+
+    @Test(dependsOnMethods = {"Review"})
+    public void EmailFriend(){
+        new HomePage().clicksearch(config.product()).clicktoproductpage();
+        new ProductPage().clickEmail().EmailInfo(config.friendemail(),config.bodytext());
+        Assert.assertTrue(new EmailFriendPage().EmailMessage().contains("Your message"));
+    }
+
+    @Test(dependsOnMethods = {"EmailFriend"})
     public void Search(){
         new HomePage().clicksearch(config.product()).clicktoproductpage();
         Assert.assertTrue(new ProductPage().message().contains("Apple MacBook"));

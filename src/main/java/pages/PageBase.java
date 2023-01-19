@@ -20,7 +20,7 @@ public class PageBase {
     // wait for elemnt
 protected void wait(By locator){
     new WebDriverWait(driver, Duration.ofSeconds(10))
-            .until(ExpectedConditions.elementToBeClickable(locator));
+        .until(ExpectedConditions.elementToBeClickable(locator));
 }
 
     protected WebElement find(By locator) {

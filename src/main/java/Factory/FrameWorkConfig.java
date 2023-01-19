@@ -20,5 +20,9 @@ public interface FrameWorkConfig extends Config {
     int thenumber();
     String browser();
     String anotherbrowser();
+    String tittlereview();
+    String text();
+    String friendemail();
+    String bodytext();
 
 }
